@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Input dengan Validasi</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <h1>Form Input dengan Validasi</h1>
+
+    <form method="post" id="myForm">
+        <label for="nama">Nama: </label>
+        <input type="text" name="nama" id="nama"><br>
+        <span id="nama-error" style="color: red"></span>
+        <br>
+
+        <label for="email">Email: </label>
+        <input type="text" id="email" name="email"><br>
+        <span id="email-error" style="color: red"></span>
+        <br>
+
+        <label for="email">Paassword: </label>
+        <input type="password" id="password" name="password"><br>
+        <span id="password-error" style="color: red"></span>
+        <br>
+
+        <input type="submit" value="Submit">
+    </form>
+
+    <div id="hasil"></div>
+
+    <script>
+        $(document).ready(() => {
+            $("#myForm").submit(function (e) {
+                e.preventDefault()
+
+                const nama = $("#nama").val()
+                const email = $("#email").val()
+                const password = $("#password").val()
+                let valid = true
+    
+                if (nama === "") {
+                    $("#nama-error").text("Nama harus diisi!")
+                    valid = false
+                } else {
+                    $("#nama-error").text("")
+                }
+    
+                if (email === "") {
+                    $("#email-error").text("Email harus diisi!")
+                    valid = false
+                } else {
+                    $("#email-error").text("")
+                }
+
+                if (password.length < 8) {
+                    $("#password-error").text("Password harus diisi minimal 8 karakter")
+                    valid = false
+                } else {
+                    $("#password-error").text("")
+                }
+    
+                if (valid) {
+                    $.ajax({
+                        url: 'proses_validasi.php',
+                        type: 'POST',
+                        data: $(this).serialize(),
+                        success: (res) => {
+                            $("#hasil").html(res)
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+</body>
+</html>
