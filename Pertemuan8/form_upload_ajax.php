@@ -1,16 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Unggah File Dokumen</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unggah FIle Dokumen</title>
+    <link rel="stylesheet" href="upload.css">
 </head>
 <body>
-    <form id="upload-form" action="upload_ajax.php" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" id="file">
-        <input type="submit" name="submit" value="Unggah">
-    </form>
-    <div id="status"></div>
+    <div class="upload-form-container">
+        <h1>Unggah File Dokumen</h1>
+        <form method="post" id="upload-form">
+            <div id="file-input-container">
+                <input type="file" name="file" id="file" class="file-input">
+                <label for="file" class="file-label">Pilih File</label>
+            </div>
+            <button type="submit" name="submit" class="upload-button" id="upload-button">Unggah</button>
+        </form>
+        <div id="status" class="upload-status"></div>
+    </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
     <script src="upload.js"></script>
 </body>
 </html>
